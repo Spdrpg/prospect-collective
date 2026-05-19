@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospect Collective — B2B Online Presence Management</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #f4f2ee;
+  --s1:      #edeae4;
+  --s2:      #e5e2db;
+  --ink:     #1a1917;
+  --mid:     #6b6866;
+  --lt:      #aaa8a4;
+  --faint:   #ccc9c4;
+  --blue:    #0052cc;
+  --blue-dk: #0041a8;
+  --border:  rgba(0,0,0,0.08);
+  --border-lt: rgba(0,0,0,0.05);
+  --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --serif: Georgia, 'Times New Roman', serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 52px;
+  height: 60px;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo-wrap { display: flex; align-items: center; gap: 12px; }
+.logo-img { height: 32px; width: auto; display: block; }
+.logo-fallback { display: flex; align-items: center; gap: 10px; }
+.logo-sq { display: flex; gap: 4px; align-items: center; }
+.sq { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.brand { font-size: 10px; letter-spacing: 0.2em; color: var(--lt); line-height: 1.2; font-weight: 500; }
+.brand b { color: var(--ink); display: block; font-weight: 500; }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a { font-size: 12px; letter-spacing: 0.07em; color: var(--lt); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 10px 22px;
+  border-radius: 1px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: background 0.15s;
+}
+.nav-cta:hover { background: #000; }
+
+/* ── LAYOUT ── */
+.section-row {
+  display: grid;
+  border-bottom: 0.5px solid var(--border);
+}
+.row-2col { grid-template-columns: 56px 1fr 1fr; }
+.row-1col { grid-template-columns: 56px 1fr; }
+
+.side-label {
+  border-right: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+}
+.side-label span {
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  color: var(--faint);
+  text-transform: uppercase;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.cell { padding: 52px 48px; }
+.cell-border { border-right: 0.5px solid var(--border); }
+
+/* ── MOBILE SECTION TAG (hidden on desktop) ── */
+.mobile-section-tag { display: none; }
+
+/* ── HERO LEFT ── */
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--lt);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 0.5px;
+  background: var(--lt);
+  flex-shrink: 0;
+}
+h1 { font-family: var(--serif); font-weight: 400; line-height: 1.08; }
+.h1-normal { display: block; font-size: 40px; color: var(--ink); letter-spacing: -0.015em; }
+.h1-italic { display: block; font-size: 40px; color: var(--ink); font-style: italic; letter-spacing: -0.015em; }
+.h1-muted  { display: block; font-size: 40px; color: var(--faint); letter-spacing: -0.015em; }
+
+.hero-sub {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.75;
+  margin-top: 20px;
+  margin-bottom: 28px;
+  max-width: 380px;
+}
+.hero-sub strong { color: var(--ink); font-weight: 500; }
+
+.hero-btns { display: flex; gap: 12px; align-items: center; }
+.btn-primary {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 24px;
+  border-radius: 1px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: background 0.15s;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn-primary:hover { background: var(--blue-dk) !important; }
+.btn-secondary {
+  background: transparent !important;
+  color: var(--lt) !important;
+  border: 0.5px solid var(--border) !important;
+  padding: 12px 24px;
+  border-radius: 1px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: border-color 0.15s, color 0.15s;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn-secondary:hover { border-color: var(--mid) !important; color: var(--ink) !important; }
+
+/* ── HERO RIGHT ── */
+.proof-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--s1);
+  border: 0.5px solid var(--border);
+  border-radius: 1px;
+  margin-bottom: 20px;
+}
+.proof-bar-quote {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--faint);
+  line-height: 0.8;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.proof-bar-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--mid);
+  margin-bottom: 8px;
+}
+.proof-bar-attr { font-size: 11px; color: var(--lt); }
+.proof-bar-attr strong { color: var(--ink); font-weight: 500; }
+.proof-bar-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--blue);
+  letter-spacing: 0.03em;
+}
+.proof-bar-result::before { content: '↑'; font-size: 11px; }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 0.5px solid var(--border);
+}
+.metric { background: var(--s1); padding: 18px 16px; }
+.metric-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  margin-bottom: 5px;
+}
+.metric-label { font-size: 11px; color: var(--lt); line-height: 1.4; }
+
+/* ── TICKER ── */
+.ticker-bar {
+  background: var(--s1);
+  border-bottom: 0.5px solid var(--border);
+  padding: 12px 52px;
+  overflow: hidden;
+}
+.ticker-inner {
+  display: flex;
+  gap: 40px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.ticker-dot { color: var(--mid); margin-right: 6px; font-size: 8px; }
+
+/* ── SECTIONS ── */
+.section-bg-0 { background: var(--bg); }
+.section-bg-1 { background: var(--s1); }
+.section-bg-2 { background: var(--s2); }
+
+.section-h {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 36px;
+}
+.section-h em { font-style: italic; }
+
+/* ── SERVICES ── */
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.svc { padding: 22px 0; border-top: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+.svc:nth-child(odd)  { padding-right: 32px; border-right: 0.5px solid var(--border); }
+.svc:nth-child(even) { padding-left: 32px; }
+.svc-num  { font-size: 10px; color: var(--faint); letter-spacing: 0.18em; }
+.svc-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.svc-desc { font-size: 12px; color: var(--mid); line-height: 1.65; }
+
+/* ── PROCESS ── */
+.proc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 28px;
+}
+.proc-meta { font-size: 12px; color: var(--lt); letter-spacing: 0.04em; }
+.proc-steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 0.5px solid var(--border); }
+.pstep { padding: 20px 20px 0 0; border-right: 0.5px solid var(--border); }
+.pstep:last-child { border-right: none; padding-right: 0; }
+.pstep-num  { font-size: 10px; color: var(--faint); letter-spacing: 0.15em; margin-bottom: 8px; }
+.pstep-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.pstep-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
+.pstep.active { border-top: 1.5px solid var(--ink); margin-top: -0.5px; padding-top: 19px; }
+.pstep.active .pstep-num { color: var(--ink); }
+
+/* ── PROOF ── */
+.proof-h {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+.quote-block {
+  background: var(--s1);
+  border: 0.5px solid var(--border);
+  border-radius: 1px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+.quote-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--mid);
+  margin-bottom: 12px;
+}
+.quote-who { font-size: 11px; color: var(--lt); }
+.quote-who strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 1px; font-family: var(--sans); font-style: normal; font-size: 12px; }
+
+.proof-h3 { font-size: 10px; letter-spacing: 0.2em; color: var(--lt); text-transform: uppercase; margin-bottom: 12px; }
+.sector-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.sector-tag {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 5px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 1px;
+  color: var(--mid);
+  background: var(--bg);
+}
+
+.diff-item { display: flex; gap: 12px; padding: 14px 0; border-top: 0.5px solid var(--border); align-items: flex-start; }
+.diff-icon { font-size: 15px; color: var(--lt); flex-shrink: 0; margin-top: 1px; }
+.diff-body { font-size: 12px; color: var(--mid); line-height: 1.65; }
+.diff-body strong { display: block; font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+
+/* ── CTA ── */
+.cta-section { background: var(--blue); position: relative; overflow: hidden; border-bottom: none; }
+.cta-geo { position: absolute; border-radius: 3px; transform: rotate(12deg); }
+.cta-geo-1 { right: -24px; top: -24px; width: 110px; height: 110px; border: 0.5px solid rgba(255,255,255,0.1); }
+.cta-geo-2 { right: 24px; top: 22px; width: 70px; height: 70px; border: 0.5px solid rgba(255,255,255,0.07); }
+
+.cta-side { border-right: 0.5px solid rgba(255,255,255,0.1); }
+.cta-side span { color: rgba(255,255,255,0.18); }
+
+.cta-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.cta-eyebrow::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 0.5px;
+  background: rgba(255,255,255,0.4);
+  flex-shrink: 0;
+}
+.cta-h {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.cta-h em { font-style: italic; color: rgba(255,255,255,0.6); }
+.cta-p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 20px; }
+.cta-bullets { display: flex; flex-direction: column; gap: 8px; }
+.cta-bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+.cta-bullet::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.cta-right { display: flex; flex-direction: column; gap: 10px; justify-content: center; position: relative; z-index: 2; }
+.cta-card {
+  background: rgba(255,255,255,0.08);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 1px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cta-card-label { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; margin-bottom: 3px; }
+.cta-card-val { font-size: 13px; font-weight: 500; color: #ffffff; }
+.cta-card-icon { font-size: 16px; color: rgba(255,255,255,0.3); }
+.btn-cta {
+  background: #ffffff !important;
+  color: var(--blue) !important;
+  border: none !important;
+  padding: 14px 24px;
+  border-radius: 1px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--sans);
+  text-align: center;
+  margin-top: 6px;
+  display: block;
+  transition: opacity 0.15s;
+}
+.btn-cta:hover { opacity: 0.92; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--s1);
+  border-top: 0.5px solid var(--border);
+  padding: 24px 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-left { font-size: 11px; color: var(--lt); letter-spacing: 0.05em; }
+.footer-right { display: flex; gap: 24px; }
+.footer-right a { font-size: 11px; color: var(--lt); text-decoration: none; transition: color 0.15s; }
+.footer-right a:hover { color: var(--ink); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; height: 52px; }
+  .nav-links { display: none; }
+  .logo-img { height: 26px; }
+
+  .section-row { grid-template-columns: 1fr !important; }
+  .side-label { display: none; }
+  .mobile-section-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--lt);
+    text-transform: uppercase;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .mobile-section-tag::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 0.5px;
+    background: var(--faint);
+    flex-shrink: 0;
+  }
+
+  .cell { padding: 36px 24px; }
+  .cell-border { border-right: none; border-bottom: 0.5px solid var(--border); }
+
+  .h1-normal, .h1-italic, .h1-muted { font-size: 28px; }
+  .hero-sub { font-size: 13px; max-width: 100%; }
+  .hero-btns { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-secondary { text-align: center; padding: 14px 20px; }
+
+  .proof-bar { flex-direction: column; gap: 8px; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc:nth-child(odd) { padding-right: 0; border-right: none; }
+  .svc:nth-child(even) { padding-left: 0; }
+
+  .proc-steps { grid-template-columns: 1fr 1fr; }
+  .pstep { padding-bottom: 16px; }
+  .pstep:nth-child(odd) { border-right: 0.5px solid var(--border); }
+  .pstep:nth-child(even) { border-right: none; padding-right: 0; padding-left: 16px; }
+
+  .section-h { font-size: 22px; }
+  .cta-section .section-row { grid-template-columns: 1fr !important; }
+  .cta-h { font-size: 24px; }
+
+  footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  .footer-right { justify-content: center; }
+
+  .ticker-bar { padding: 10px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap">
+    <img
+      src="logo.png"
+      alt="Prospect Collective"
+      class="logo-img"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    >
+    <div class="logo-fallback" style="display:none;">
+      <div class="logo-sq">
+        <span class="sq" style="background:#ccc9c4;"></span>
+        <span class="sq" style="background:#aaa8a4;"></span>
+        <span class="sq" style="background:#6b6866;"></span>
+        <span class="sq" style="background:#0052cc;transform:rotate(12deg);"></span>
+      </div>
+      <div class="brand">PROSPECT<b>COLLECTIVE</b></div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="#megkozelites">Megközelítés</a>
+    <a href="#folyamat">Folyamat</a>
+    <a href="#referenciak">Referenciák</a>
+    <a href="#kapcsolat">Kapcsolat</a>
+  </nav>
+  <button class="nav-cta" onclick="document.getElementById('kapcsolat').scrollIntoView({behavior:'smooth'})">
+    Konzultáció foglalása
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="section-bg-0">
+  <div class="section-row row-2col">
+    <div class="side-label"><span>Főoldal</span></div>
+
+    <div class="cell cell-border">
+      <div class="eyebrow">B2B online presence · Budapest</div>
+      <h1>
+        <span class="h1-normal">A döntéshozó már</span>
+        <span class="h1-italic">ismeri a nevedet,</span>
+        <span class="h1-muted">mire felveszitek a telefont.</span>
+      </h1>
+      <p class="hero-sub">
+        A B2B vevők <strong>80%-a elvégzi a kutatást</strong> mielőtt bármilyen partnerrel kapcsolatba lép.
+        Videó, LinkedIn, honlap — mi azt az utat építjük fel, ami miatt te vagy az egyértelmű választás.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('kapcsolat').scrollIntoView({behavior:'smooth'})">
+          Ingyenes presence audit →
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('referenciak').scrollIntoView({behavior:'smooth'})">
+          Esettanulmányok
+        </button>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="proof-bar">
+        <div class="proof-bar-quote">"</div>
+        <div>
+          <p class="proof-bar-text">
+            Három hónap alatt két olyan cég keresett meg minket inbound-on, akikkel hónapok óta próbáltunk kapcsolatba kerülni. A content elvégezte a hideghívások munkáját — mi csak felettük kellett zárni.
+          </p>
+          <p class="proof-bar-attr">
+            <strong>Varga Dániel, CEO</strong>
+            B2B IT-biztonsági megoldások · 1,2 Mrd Ft árbevétel
+          </p>
+          <p class="proof-bar-result">+340% inbound megkeresés 6 hónap alatt</p>
+        </div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric">
+          <div class="metric-num">3×</div>
+          <div class="metric-label">több qualified inbound megkeresés 6 hónapon belül</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">40%</div>
+          <div class="metric-label">rövidebb sales ciklus erős online jelenléttel</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">12 hét</div>
+          <div class="metric-label">az első mérhető pipeline eredményig</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">68%</div>
+          <div class="metric-label">magasabb deal close rate ismert brand esetén</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TICKER ── -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span><span class="ticker-dot">◆</span>VIDEÓGYÁRTÁS</span>
+    <span><span class="ticker-dot">◆</span>LINKEDIN STRATÉGIA</span>
+    <span><span class="ticker-dot">◆</span>KONVERZIÓS HONLAP</span>
+    <span><span class="ticker-dot">◆</span>LEAD AUTOMATIZÁLÁS</span>
+    <span><span class="ticker-dot">◆</span>THOUGHT LEADERSHIP</span>
+    <span><span class="ticker-dot">◆</span>PIPELINE REPORTING</span>
+    <span><span class="ticker-dot">◆</span>SALES ENABLEMENT</span>
+  </div>
+</div>
+
+<!-- ── MEGKÖZELÍTÉS ── -->
+<div class="section-bg-0" id="megkozelites">
+  <div class="section-row row-1col">
+    <div class="side-label"><span>Megközelítés</span></div>
+    <div class="cell">
+      <p class="mobile-section-tag">Megközelítés</p>
+      <h2 class="section-h">Nem ügynökség vagyunk.<br>Egy <em>sales-fókuszú</em> partner.</h2>
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="svc-num">01</div>
+          <div class="svc-name">Videógyártás</div>
+          <div class="svc-desc">Case study videók, thought leadership tartalom és LinkedIn Reels. A kamera előtt olyan szakembernek látszol, aki valóban az — mert az vagy.</div>
+        </div>
+        <div class="svc">
+          <div class="svc-num">02</div>
+          <div class="svc-name">Social media menedzsment</div>
+          <div class="svc-desc">LinkedIn stratégia és következetes jelenlét, ami döntéshozókat ér el és pipeline-t épít — nem csak lájkokat gyűjt.</div>
+        </div>
+        <div class="svc">
+          <div class="svc-num">03</div>
+          <div class="svc-name">Honlap</div>
+          <div class="svc-desc">Konverzióra tervezett weboldal, ami meggyőzi a vevőt mielőtt az első meeting létrejön. Nem csak szép — hanem működik.</div>
+        </div>
+        <div class="svc">
+          <div class="svc-num">04</div>
+          <div class="svc-name">Lead automatizálás</div>
+          <div class="svc-desc">Outreach és nurturing rendszerek a hosszú B2B ciklushoz. A megfelelő üzenet, a megfelelő embernek, a megfelelő pillanatban.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOLYAMAT ── -->
+<div class="section-bg-1" id="folyamat">
+  <div class="section-row row-1col">
+    <div class="side-label"><span>Folyamat</span></div>
+    <div class="cell">
+      <p class="mobile-section-tag">Folyamat</p>
+      <div class="proc-header">
+        <h2 class="section-h" style="margin-bottom:0;">Hogyan dolgozunk</h2>
+        <span class="proc-meta">Négy fázis · 12–16 hét</span>
+      </div>
+      <div class="proc-steps">
+        <div class="pstep active">
+          <div class="pstep-num">01 — Diagnózis</div>
+          <div class="pstep-title">Presence audit</div>
+          <div class="pstep-desc">Megnézzük mit lát rólad a vevőd — még mielőtt felveszitek a kapcsolatot.</div>
+        </div>
+        <div class="pstep">
+          <div class="pstep-num">02 — Stratégia</div>
+          <div class="pstep-title">Revenue-térkép</div>
+          <div class="pstep-desc">Sales-fókuszú content és channel stratégia, a te iparágadra és ideális vevődre szabva.</div>
+        </div>
+        <div class="pstep">
+          <div class="pstep-num">03 — Kivitelezés</div>
+          <div class="pstep-title">Teljes gyártás</div>
+          <div class="pstep-desc">Videó, szöveg, design, tech — mi visszük végig. Nem kell koordinálnod öt alvállalkozót.</div>
+        </div>
+        <div class="pstep">
+          <div class="pstep-num">04 — Optimalizálás</div>
+          <div class="pstep-title">Pipeline reporting</div>
+          <div class="pstep-desc">Havi riportban qualified lead és deal value szerepel — nem impressziók és reach.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── REFERENCIÁK ── -->
+<div class="section-bg-2" id="referenciak">
+  <div class="section-row row-2col">
+    <div class="side-label"><span>Referenciák</span></div>
+
+    <div class="cell cell-border">
+      <p class="mobile-section-tag">Referenciák</p>
+      <h2 class="proof-h">Miért bízzák ránk<br>a milliós dealeket?</h2>
+      <div class="quote-block">
+        <p class="quote-text">„Korábban azt hittük, a jó munka magáért beszél. De a döntéshozók nem találtak ránk. A Prospect Collective felépítette azt a jelenlétet, ami miatt ma ők keresnek minket — nem fordítva."</p>
+        <div class="quote-who">
+          <strong>Horváth Gábor, Ügyvezető</strong>
+          Pénzügyi tanácsadó · enterprise szegmens · 15 éve a piacon
+        </div>
+      </div>
+      <div class="quote-block">
+        <p class="quote-text">„A partnerjelöltek már felkészülten jönnek a meetingre — ismerik a videóinkat, értik a megközelítésünket. A closing rövidebb lett, a deal mérete nagyobb."</p>
+        <div class="quote-who">
+          <strong>Németh Anna, Managing Partner</strong>
+          Stratégiai tanácsadó · 200+ enterprise ügyfél
+        </div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <p class="proof-h3">Ügyfelek szektorai</p>
+      <div class="sector-tags">
+        <span class="sector-tag">B2B SaaS</span>
+        <span class="sector-tag">Tanácsadás</span>
+        <span class="sector-tag">IT szolgáltatás</span>
+        <span class="sector-tag">Pénzügy</span>
+        <span class="sector-tag">Logisztika</span>
+        <span class="sector-tag">Legal</span>
+        <span class="sector-tag">Gyártás</span>
+        <span class="sector-tag">HR tech</span>
+      </div>
+      <div class="diff-item">
+        <i class="ti ti-eye diff-icon" aria-hidden="true"></i>
+        <div class="diff-body">
+          <strong>Sales-szemlélet, nem marketing-szemlélet</strong>
+          Minden döntésünket az vezérli, hogy a végén deal legyen — nem engagement metrikák.
+        </div>
+      </div>
+      <div class="diff-item">
+        <i class="ti ti-users diff-icon" aria-hidden="true"></i>
+        <div class="diff-body">
+          <strong>Egy partner, nem öt alvállalkozó</strong>
+          Videós, copywriter, designer, stratéga — egy csapatban, egy felelősséggel.
+        </div>
+      </div>
+      <div class="diff-item">
+        <i class="ti ti-chart-line diff-icon" aria-hidden="true"></i>
+        <div class="diff-body">
+          <strong>Pipeline, nem impressziók</strong>
+          A riportban qualified lead és deal value szerepel. Amit mérünk, az számít.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-section" id="kapcsolat">
+  <div class="cta-geo cta-geo-1"></div>
+  <div class="cta-geo cta-geo-2"></div>
+  <div class="section-row row-2col" style="border-bottom:none;background:transparent;">
+    <div class="side-label cta-side"><span>Kapcsolat</span></div>
+
+    <div class="cell cell-border" style="border-right-color:rgba(255,255,255,0.1);position:relative;z-index:2;">
+      <div class="cta-eyebrow">Következő lépés</div>
+      <h2 class="cta-h">Kérd az ingyenes<br><em>presence auditot.</em></h2>
+      <p class="cta-p">30 perc alatt megmutatjuk mit lát rólad a vevőd ma — és pontosan hol a legnagyobb rés a pipeline-odban.</p>
+      <div class="cta-bullets">
+        <div class="cta-bullet">Átvilágítjuk a LinkedIn profilod, honlapod és tartalmaidat</div>
+        <div class="cta-bullet">Megmutatjuk mit lát egy döntéshozó az első 30 másodpercben</div>
+        <div class="cta-bullet">Konkrét javaslatokat adunk — kötelezettség nélkül</div>
+      </div>
+    </div>
+
+    <div class="cell cta-right" style="position:relative;z-index:2;">
+      <div class="cta-card">
+        <div>
+          <div class="cta-card-label">Ingyenes konzultáció</div>
+          <div class="cta-card-val">30 perces presence audit</div>
+        </div>
+        <i class="ti ti-calendar cta-card-icon" aria-hidden="true"></i>
+      </div>
+      <div class="cta-card">
+        <div>
+          <div class="cta-card-label">Elérhetőség</div>
+          <div class="cta-card-val">hello@prospectcollective.hu</div>
+        </div>
+        <i class="ti ti-mail cta-card-icon" aria-hidden="true"></i>
+      </div>
+      <button class="btn-cta">Időpontot foglalok →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Prospect Collective · Budapest</div>
+  <div class="footer-right">
+    <a href="#">ÁSZF</a>
+    <a href="#">Adatvédelem</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>
